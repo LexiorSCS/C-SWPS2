@@ -8,13 +8,41 @@ public class Player
 
     public void Display()
     {
-        Console.WriteLine(avatar);
-        Console.WriteLine($"Position: {x}, {y}");
+        Console.SetCursorPosition(x, y);
+        Console.Write(avatar);
     }
 
     public void Move(int diffX, int diffY)
     {
         x += diffX;
         y += diffY;
+    }
+
+    public bool TakeTurn(ref bool isPlaying)
+    {
+        ConsoleKeyInfo input = Console.ReadKey(true);
+        Console.SetCursorPosition(x, y);
+        Console.Write(" ");
+        switch (input.Key)
+        {
+            case ConsoleKey.S:
+                Move(0, 1);
+                break;
+            case ConsoleKey.W:
+                Move(0, -1);
+                break;
+            case ConsoleKey.A:
+                Move(-1, 0);
+                break;
+            case ConsoleKey.D:
+                Move(1, 0);
+                break;
+           case ConsoleKey.Q:
+                isPlaying = false;
+                return isPlaying;
+        
+        }
+        Display();
+        return isPlaying;
     }
 }
